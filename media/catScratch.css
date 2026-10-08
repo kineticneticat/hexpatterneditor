@@ -1,0 +1,26 @@
+body {
+	justify-content: center;
+	align-items: center;
+	margin: 1em 2em;
+}
+
+.patterns {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	align-content: flex-start;
+	gap: 0;
+}
+
+.pattern {
+	flex: 0 0 auto;
+	line-height: 0;
+}
+
+.pattern canvas {
+	display: block;
+}
+
+.pattern input {
+	field-sizing: content;
+}
