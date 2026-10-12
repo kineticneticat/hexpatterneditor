@@ -21,7 +21,7 @@ export class CatScratchEditorProvider implements vscode.CustomTextEditorProvider
 		return providerRegistration;
 	}
 
-	private static readonly viewType = 'hexpatternrenderer.hexpattern';
+	private static readonly viewType = 'hexpatterneditor.hexpattern';
 
 
 	constructor(

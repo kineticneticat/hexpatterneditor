@@ -22,7 +22,7 @@ class CatScratchEditorProvider {
         const providerRegistration = vscode.window.registerCustomEditorProvider(CatScratchEditorProvider.viewType, provider);
         return providerRegistration;
     }
-    static viewType = 'hexpatternrenderer.hexpattern';
+    static viewType = 'hexpatterneditor.hexpattern';
     constructor(context) {
         this.context = context;
     }
