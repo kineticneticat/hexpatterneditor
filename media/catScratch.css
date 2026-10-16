@@ -4,22 +4,57 @@ body {
 	margin: 1em 2em;
 }
 
-.patterns {
+#patterns {
 	display: flex;
 	flex-wrap: wrap;
 	align-items: center;
 	align-content: flex-start;
 	gap: 0;
+	outline: none;
 }
+
 
 .pattern {
 	flex: 0 0 auto;
 	line-height: 0;
+	background-color: transparent;
+	display: flex;
+}
+.pattern canvas:hover {
+	background-color: var(--vscode-editor-inactiveSelectionBackground);
+}
+.pattern.highlight canvas {
+	background-color: var(--vscode-editor-selectionBackground);
+}
+
+
+.gutter {
+	background-color: transparent;
+	width: 10px;
+	flex: none
+}
+.gutter[idx="-1"] {
+	align-self: stretch;
+}
+.gutter:hover {
+	background-color: var(--vscode-editor-inactiveSelectionBackground);
+}
+
+.gutter div {
+	margin: 0px 4px 0px 4px;
+	background-color: transparent;
+	height: stretch;
+}
+
+.gutter.caret div {
+	background-color: var(--vscode-editorCursor-foreground, white)
 }
 
 .pattern canvas {
 	display: block;
+	background-color: transparent;
 }
+
 
 .pattern input {
 	field-sizing: content;

@@ -3,15 +3,20 @@
 		"module": "commonjs",
 		"target": "ES2024",
 		"lib": [
-			"ES2024"
+			"ES2024",
+			"DOM"
 		],
 		"outDir": "out",
+		"rootDir": "src",
 		"sourceMap": true,
 		"strict": true,
-		"rootDir": "src",
+		"types": ["node", "vscode-webview"]
 	},
 	"exclude": [
 		"node_modules",
 		".vscode-test"
 	],
+	"include": [
+		"src"
+	]
 }

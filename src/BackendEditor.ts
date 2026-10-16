@@ -13,11 +13,11 @@ import { getNonce, parsePatterns, reconstructFile } from './util';
  * - Loading scripts and styles in a custom editor.
  * - Synchronizing changes between a text document and a custom editor.
  */
-export class CatScratchEditorProvider implements vscode.CustomTextEditorProvider {
+export class HexpatternEditorProvider implements vscode.CustomTextEditorProvider {
 
 	public static register(context: vscode.ExtensionContext): vscode.Disposable {
-		const provider = new CatScratchEditorProvider(context);
-		const providerRegistration = vscode.window.registerCustomEditorProvider(CatScratchEditorProvider.viewType, provider);
+		const provider = new HexpatternEditorProvider(context);
+		const providerRegistration = vscode.window.registerCustomEditorProvider(HexpatternEditorProvider.viewType, provider);
 		return providerRegistration;
 	}
 
@@ -47,7 +47,7 @@ export class CatScratchEditorProvider implements vscode.CustomTextEditorProvider
 		function updateWebview() {
 			webviewPanel.webview.postMessage({
 				type: 'update',
-				patterns: parsePatterns(document.getText()),
+				iotas: parsePatterns(document.getText()),
 			});
 		}
 
@@ -89,7 +89,7 @@ export class CatScratchEditorProvider implements vscode.CustomTextEditorProvider
 	private getHtmlForWebview(webview: vscode.Webview): string {
 		// Local path to script and css for the webview
 		const scriptUri = webview.asWebviewUri(vscode.Uri.joinPath(
-			this.context.extensionUri, 'media', 'catScratch.js'));
+			this.context.extensionUri, 'out', 'FrontendEditor.js'));
 
 		const styleResetUri = webview.asWebviewUri(vscode.Uri.joinPath(
 			this.context.extensionUri, 'media', 'reset.css'));
@@ -124,7 +124,7 @@ export class CatScratchEditorProvider implements vscode.CustomTextEditorProvider
 				<title>Cat Scratch</title>
 			</head>
 			<body>
-				<div class="patterns">
+				<div id="patterns" tabindex="-1">
 				</div>
 			
 				<script nonce="${nonce}" src="${scriptUri}"></script>

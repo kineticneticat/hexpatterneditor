@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CatScratchEditorProvider = void 0;
+exports.HexpatternEditorProvider = void 0;
 const vscode = require("vscode");
 const util_1 = require("./util");
 /**
@@ -15,11 +15,11 @@ const util_1 = require("./util");
  * - Loading scripts and styles in a custom editor.
  * - Synchronizing changes between a text document and a custom editor.
  */
-class CatScratchEditorProvider {
+class HexpatternEditorProvider {
     context;
     static register(context) {
-        const provider = new CatScratchEditorProvider(context);
-        const providerRegistration = vscode.window.registerCustomEditorProvider(CatScratchEditorProvider.viewType, provider);
+        const provider = new HexpatternEditorProvider(context);
+        const providerRegistration = vscode.window.registerCustomEditorProvider(HexpatternEditorProvider.viewType, provider);
         return providerRegistration;
     }
     static viewType = 'hexpatterneditor.hexpattern';
@@ -40,7 +40,7 @@ class CatScratchEditorProvider {
         function updateWebview() {
             webviewPanel.webview.postMessage({
                 type: 'update',
-                patterns: (0, util_1.parsePatterns)(document.getText()),
+                iotas: (0, util_1.parsePatterns)(document.getText()),
             });
         }
         // Hook up event handlers so that we can synchronize the webview with the text document.
@@ -75,7 +75,7 @@ class CatScratchEditorProvider {
      */
     getHtmlForWebview(webview) {
         // Local path to script and css for the webview
-        const scriptUri = webview.asWebviewUri(vscode.Uri.joinPath(this.context.extensionUri, 'media', 'catScratch.js'));
+        const scriptUri = webview.asWebviewUri(vscode.Uri.joinPath(this.context.extensionUri, 'out', 'FrontendEditor.js'));
         const styleResetUri = webview.asWebviewUri(vscode.Uri.joinPath(this.context.extensionUri, 'media', 'reset.css'));
         const styleVSCodeUri = webview.asWebviewUri(vscode.Uri.joinPath(this.context.extensionUri, 'media', 'vscode.css'));
         const styleMainUri = webview.asWebviewUri(vscode.Uri.joinPath(this.context.extensionUri, 'media', 'catScratch.css'));
@@ -102,7 +102,7 @@ class CatScratchEditorProvider {
 				<title>Cat Scratch</title>
 			</head>
 			<body>
-				<div class="patterns">
+				<div id="patterns" tabindex="-1">
 				</div>
 			
 				<script nonce="${nonce}" src="${scriptUri}"></script>
@@ -166,5 +166,5 @@ class CatScratchEditorProvider {
         return vscode.workspace.applyEdit(edit);
     }
 }
-exports.CatScratchEditorProvider = CatScratchEditorProvider;
-//# sourceMappingURL=catScratchEditor.js.map
+exports.HexpatternEditorProvider = HexpatternEditorProvider;
+//# sourceMappingURL=BackendEditor.js.map
